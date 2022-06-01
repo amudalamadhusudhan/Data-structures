@@ -1,99 +1,99 @@
-// program for circular queue 
-#include <stdio.h>
-#define size 5
+//1.program for circular queue emplementation using array
 
-void insertq(int[], int);
-void deleteq(int[]);
-void display(int[]);
-
-int front =  - 1;
-int rear =  - 1;
-
+#include<stdio.h>
+int s=10,front =-1,rear=-1,queue[10];
+void enqueue(int k);
+void dequeue();
+void display();
+void empty();
 int main()
 {
-    int n, ch;
-    int queue[size];
-    do
-    {
-        printf("Circular Queue: 1. Insert 2. Delete3. Display 0. Exit");
-        printf("\nEnter Choice 0-3? : ");
-        scanf("%d", &ch);
-        switch (ch)
-        {
-            case 1:
-                printf("Enter number:\n");
-                scanf("%d", &n);
-                insertq(queue, n);
-                break;
-            case 2:
-                deleteq(queue);
-                break;
-            case 3:
-                display(queue);
-                break;
-        }
-    }while (ch != 0);
-}
-
-
-void insertq(int queue[], int item)
+int i,choice,v;
+printf("1.insertion 2.deletion 3.display 4.empty 5 exit\n");
+while(choice!=5)
 {
-    if ((front == 0 && rear == size - 1) || (front == rear + 1))
-    {
-        printf("queue is full");
-        return;
-    }
-    else if (rear ==  - 1)
-    {
-        rear++;
-        front++;
-    }
-    else if (rear == size - 1 && front > 0)
-    {
-        rear = 0;
-    }
-    else
-    {
-        rear++;
-    }
-    queue[rear] = item;
+printf("enter the choice of opration\n");
+scanf("%d",&choice);
+switch(choice)
+{
+case 1:
+printf("enter the value to insert \n ");
+scanf("%d",&v);
+enqueue(v);
+break;
+case 2:
+dequeue();
+break;
+case 3: 
+display();
+break;
+case 4: 
+empty();
+break;
+default: 
+printf("wrong selection\n");
+ }
+}
+return 0;
+}
+void enqueue(int k)
+{
+if(front==-1 && rear==-1)     
+{  
+front=0;
+rear=0; //  rear++ we cant do becoz it is in circular
+queue[rear]=k;
+printf("%d element is inserted into queue [%d]\n",k,queue[rear]);
+}
+else if(((rear+1)%s)==front)
+{
+printf("queue is full\n");
+}
+else
+rear = (rear+1)%s; // here we are doing
+queue[rear]=k;
+printf("%d element is inserted into queue [%d]\n",k,queue[rear]);
+}
+void dequeue()
+{
+if(front ==-1 && rear == -1)
+{
+printf("queue is Empty deletion is not possible\n");
+}
+else if(front == rear) // one element in queue
+{
+front=rear=-1;
+printf("%d element is deleted \n", queue[front]);
+}
+else
+{
+printf("%d element is deleted \n", queue[front]);
+front=(front+1)%s;
+}
+}
+void display()
+{
+int i=0;
+printf("display the elemnts\n");
+if(front==-1&&rear==-1) 
+{ 
+printf("queue is empty\n");
+}
+else
+{
+while(i<=rear)
+{
+printf("display element  [%d]=queue [%d]\n",i,queue[i]);
+i=(i+1)%s;
+}
+}
+}
+void empty()
+{
+if(front==-1 && rear==-1)  
+printf("queue is empty\n");
 }
 
-void display(int queue[])
-{
-    int i;
-    printf("\n");
-    if (front > rear)
-    {
-        for (i = front; i < size; i++)
-        {
-            printf("%d ", queue[i]);
-        }
-        for (i = 0; i <= rear; i++)
-            printf("%d ", queue[i]);
-    }
-    else
-    {
-        for (i = front; i <= rear; i++)
-            printf("%d ", queue[i]);
-    }
-}
 
-void deleteq(int queue[])
-{
-    if (front ==  - 1)
-    {
-        printf("Queue is empty ");
-    }
-    else if (front == rear)
-    {
-        printf("\n %d deleted", queue[front]);
-        front =  - 1;
-        rear =  - 1;
-    }
-    else
-    {
-        printf("\n %d deleted", queue[front]);
-        front++;
-    }
-}
+
+
