@@ -1,5 +1,5 @@
 # Data-structures
-token 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
+
 
 **Day2 Assignment**
 1. Implement Stack using Array.
